@@ -46,4 +46,4 @@ $ docker run --rm \
   -e SECRECT_KEY=xxxxxxxxxx \
   registry.cn-hangzhou.aliyuncs.com/deepzz/backup
 ```
-环境变量将会覆盖命令行参数。
+这里的配置可以解读为：数据库 eiblog 将会每 7 天备份一次，每次备份数据保留 60 天，备份在七牛云的 eiblog。环境变量将会覆盖命令行参数。
