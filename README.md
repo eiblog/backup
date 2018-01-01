@@ -1,6 +1,6 @@
 # backup
 
-用于备份 Eiblog 数据库到七牛云
+用于备份 Eiblog 数据库到七牛云，使用 docker-compose.yml 运行的朋友请修改该文件的相关配置。
 
 你可以使用如下命令查看帮助：
 ```
