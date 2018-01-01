@@ -4,7 +4,7 @@
 
 你可以使用如下命令查看帮助：
 ```
-$ registry.cn-hangzhou.aliyuncs.com/deepzz/backup -h
+$ docker run --rm registry.cn-hangzhou.aliyuncs.com/deepzz/backup -h
 Usage of ./backup:
   -ak string
     	qiniu AccessKey, must
