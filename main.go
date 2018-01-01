@@ -114,7 +114,6 @@ func mongoDump(ch chan string) {
 	t := time.NewTicker(interval)
 	for {
 		now := <-t.C
-		fmt.Println(now)
 
 		ctx, cancel := context.WithTimeout(context.Background(), time.Minute*20)
 		defer cancel()
@@ -132,7 +131,7 @@ func mongoDump(ch chan string) {
 			log.Println("tar", err)
 			continue
 		}
-		log.Println("created " + backupDB + ".tar.gz success, uploading to qiniu.")
+		log.Println("created " + name + " success, uploading to qiniu.")
 		ch <- name
 	}
 }
@@ -155,14 +154,14 @@ func qiniuUpload(ch chan string) {
 		// uploader
 		uploader := storage.NewFormUploader(cfg)
 		ret := new(storage.PutRet)
-		putExtra := &storage.PutExtra{OnProgress: onProgress}
+		putExtra := &storage.PutExtra{}
 
-		err := uploader.PutFile(nil, ret, upToken, key, fmt.Sprintf("/tmp/%s", key), putExtra)
+		err := uploader.PutFile(nil, ret, upToken, key, key, putExtra)
 		if err != nil {
 			log.Println(err)
 			continue
 		}
-		log.Printf("upload %s.tar.gz success!\n", backupDB)
+		log.Printf("uploaded %s success!\n", key)
 
 		// delete file
 		bucketManager := storage.NewBucketManager(mac, cfg)
@@ -170,16 +169,6 @@ func qiniuUpload(ch chan string) {
 		if err != nil {
 			log.Println(err)
 		}
-	}
-}
-
-// progress
-func onProgress(fsize, uploaded int64) {
-	d := int(float64(uploaded) / float64(fsize) * 100)
-	if fsize == uploaded {
-		fmt.Printf("\rUpload completed!          \n")
-	} else {
-		fmt.Printf("\r%02d%% uploaded              ", int(d))
 	}
 }
 
