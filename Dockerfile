@@ -1,5 +1,6 @@
-FROM mongo:3.2
+FROM alpine
 
+RUN apk --no-cache add mongodb-tools
 COPY backup /app/
 
 WORKDIR /app
