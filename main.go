@@ -119,7 +119,6 @@ func mongoDump(ch chan string) {
 		ctx, cancel := context.WithTimeout(context.Background(), time.Minute*20)
 		defer cancel()
 		cmd := exec.CommandContext(ctx, "mongodump", "-h", ips[0].String()+":27017", "-d", backupDB, "-o", "/tmp")
-		fmt.Println(cmd.Args)
 		err = cmd.Run()
 		if err != nil {
 			log.Println("mongodump", err)
@@ -158,7 +157,7 @@ func qiniuUpload(ch chan string) {
 		ret := new(storage.PutRet)
 		putExtra := &storage.PutExtra{OnProgress: onProgress}
 
-		err := uploader.PutFile(nil, ret, upToken, key, fmt.Sprint("/tmp/%s", key), putExtra)
+		err := uploader.PutFile(nil, ret, upToken, key, fmt.Sprintf("/tmp/%s", key), putExtra)
 		if err != nil {
 			log.Println(err)
 			continue
