@@ -1,6 +1,8 @@
 # backup
 
-用于备份 Eiblog 数据库到七牛云，使用 docker-compose.yml 运行的朋友请修改该文件的相关配置。
+用于备份 Eiblog 数据库到七牛云，程序使用 `mongodump` 命令进行数据导出，并进行 gzip 压缩，最后上传到七牛云。默认文件名为 `eiblog-$date.tag.gz`。程序将连接 mongodb（host 地址）。如未使用 eiblog 下的 docker-compose.yml ，请自行寻找方法。
+
+使用 [docker-compose.yml](https://github.com/eiblog/eiblog) 运行的朋友请修改该文件的相关配置。
 
 你可以使用如下命令查看帮助：
 ```
