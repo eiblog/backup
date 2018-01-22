@@ -4,6 +4,8 @@
 
 使用 [docker-compose.yml](https://github.com/eiblog/eiblog) 运行的朋友请修改该文件的相关配置。
 
+> 注意，最好再新建一个私有的 bucket 进行数据库的备份。
+
 你可以使用如下命令查看帮助：
 ```
 $ docker run --rm registry.cn-hangzhou.aliyuncs.com/deepzz/backup -h
